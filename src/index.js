@@ -3,6 +3,7 @@ import Main from './navigation/Main';
 import { Provider } from 'react-redux'
 import {store} from './store'
 import { init } from "./db";
+import { StatusBar } from 'expo-status-bar';
 
 init()
   .then(() => {
@@ -16,6 +17,7 @@ init()
 export default function App() {
   return (
     <Provider store={store}>
+      <StatusBar style="light" />
       <Main/>
     </Provider>
   );

@@ -2,8 +2,8 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import LocationsNavigator from './Locations'
-import CharactersNavigator from './Characters'
+import LocationsNavigator from './LocationsNavigator'
+import CharactersNavigator from './CharactersNavigator'
 import { Add } from '../screens/'
 
 const BottomTabs = createBottomTabNavigator()
@@ -19,8 +19,6 @@ const AppNavigator = () => {
           tabBarInactiveTintColor: 'white',
           tabBarStyle: {
             backgroundColor: '#1a1a1a',
-            borderTopColor: '#1a1a1a',
-            borderTopWidth: 1,
           },
         })}
       >

@@ -1,6 +1,6 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Locations, Location } from '../screens'
+import { Locations, LocationScreen } from '../screens'
 
 const Stack = createNativeStackNavigator()
 
@@ -13,7 +13,7 @@ const LocationsNavigator = () => {
     })}
     >
       <Stack.Screen name="Locations" component={Locations} />
-      <Stack.Screen name="Location" component={Location} />
+      <Stack.Screen name="Location" component={LocationScreen} />
     </Stack.Navigator>
   )
 }
