@@ -3,16 +3,13 @@ import React from 'react'
 import Character from './Character.js'
 
 export default function CharacterList({ characters }) {
-  console.log(characters)
-  const keyExtractor = (character) => character.id.toString()
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your Favourite Characters</Text>
       <FlatList
         data={characters}
-        renderItem={({ character }) => <Character character={character} />}
-        keyExtractor={keyExtractor}
+        renderItem={( {item} ) => <Character character={item} />}
+        keyExtractor={(item) => item.id}
       />
     </View>
   )

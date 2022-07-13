@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function Location() {
+export default function LocationScreen() {
   return (
     <View>
-      <Text>Location</Text>
+      <Text>LocationScreen</Text>
     </View>
   )
 }

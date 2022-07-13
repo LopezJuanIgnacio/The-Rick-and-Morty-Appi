@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function Character() {
+export default function CharacterScreen() {
   return (
     <View>
-      <Text>Character</Text>
+      <Text>CharacterScreen</Text>
     </View>
   )
 }

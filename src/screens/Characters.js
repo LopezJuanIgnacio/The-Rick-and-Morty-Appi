@@ -14,7 +14,7 @@ export default function Characters() {
         `https://rickandmortyapi.com/api/character?page=${page}`
       )
       const { results } = await data.json()
-      setContent([...content, results])
+      setContent(content=>[...content, ...results])
       setLoading(false)
     }
     fetchData()
