@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import Loading from '../../assets/Loading.gif'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createContext } from 'react'
 import { CharacterList } from '../components/'
 
-export default function Characters() {
+export const NavContext = createContext()
+
+export default function Characters({ navigation, route }) {
   const [loading, setLoading] = useState(true)
   const [content, setContent] = useState([])
   const [page, setPage] = useState(1)
@@ -14,25 +16,27 @@ export default function Characters() {
         `https://rickandmortyapi.com/api/character?page=${page}`
       )
       const { results } = await data.json()
-      setContent(content=>[...content, ...results])
+      setContent((content) => [...content, ...results])
       setLoading(false)
     }
     fetchData()
   }, [page])
 
   return (
-    <View style={styles.container}>
-      {loading ? (
-        <Image source={Loading} style={styles.loading} />
-      ) : (
-        <>
-          <CharacterList characters={content} />
-          <View style={styles.Button} onPress={()=>setPage(page+1)} >
-            <Text style={styles.ButtonLabel}>Load more</Text>
-          </View>
-        </>
-      )}
-    </View>
+    <NavContext.Provider value={navigation}>
+      <View style={styles.container}>
+        {loading ? (
+          <Image source={Loading} style={styles.loading} />
+        ) : (
+          <CharacterList
+            characters={content}
+            setPage={setPage}
+            page={page}
+            loading={loading}
+          />
+        )}
+      </View>
+    </NavContext.Provider>
   )
 }
 
@@ -58,6 +62,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   scroll: {
-    flex:1,
-  }
+    flex: 1,
+  },
 })

@@ -1,7 +1,9 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
+import React, {useContext} from 'react'
+import { NavContext } from '../screens/Characters'
 
 export default function Character({ character }) {
+  const  navigation  = useContext(NavContext)
   return (
     <View style={styles.container}>
       <Image
@@ -32,6 +34,9 @@ export default function Character({ character }) {
         <Text style={styles.res}>{character.episode.length}</Text>
         <Text style={styles.label}> Location: </Text>
         <Text style={styles.res}>{character.location.name}</Text>
+        <TouchableWithoutFeedback onPress={()=> navigation.navigate('Character', {Id: character.id})} >
+          <Text style={styles.more}>See more</Text>
+        </TouchableWithoutFeedback>
       </View>
     </View>
   )
@@ -45,7 +50,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     flexDirection: 'row',
     width: 350,
-    height: 200,
+    height: 240,
     borderRadius: 10,
     padding: 10,
   },
@@ -81,4 +86,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 10,
   },
+  more: {
+    fontSize: 16,
+    color: 'lime',
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginTop: 10,
+  }
 })
