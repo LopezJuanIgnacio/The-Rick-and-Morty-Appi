@@ -34,7 +34,7 @@ export default function Character({ character }) {
         <Text style={styles.res}>{character.episode.length}</Text>
         <Text style={styles.label}> Location: </Text>
         <Text style={styles.res}>{character.location.name}</Text>
-        <TouchableWithoutFeedback onPress={()=> navigation.navigate('Character', {Id: character.id})} >
+        <TouchableWithoutFeedback onPress={()=> navigation.navigate('Character', {id: character.id})} >
           <Text style={styles.more}>See more</Text>
         </TouchableWithoutFeedback>
       </View>
