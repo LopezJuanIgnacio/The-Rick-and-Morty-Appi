@@ -1,9 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import React from "react";
 import Character from "./Character.js";
 import Button from "./Button.js";
@@ -13,35 +8,43 @@ export default function List({ type, content, setPage, page }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your Favourite {type} </Text>
-      <Text style={styles.page}>Page: {page}</Text>
+      {type !== "ownCharacters" && (
+        <Text style={styles.page}>Page: {page}</Text>
+      )}
       <FlatList
         style={styles.list}
         data={content}
         renderItem={({ item }) =>
-          type === "characters" ? <Character character={item} /> : <Location location={item} />
+          type === "characters" ? (
+            <Character character={item} />
+          ) : (
+            <Location location={item} />
+          )
         }
         keyExtractor={(item) => item.id}
       />
-      <View style={styles.Botonera}>
-        <Button
-          onpress={() => setPage((page) => (page !== 1 ? page - 1 : page))}
-          label="Previous"
-          color="lime"
-          style={{
-            marginHorizontal: 20,
-            marginTop: 20,
-          }}
-        />
-        <Button
-          onpress={() => setPage((page) => page + 1)}
-          label="Next"
-          color="lime"
-          style={{
-            marginHorizontal: 20,
-            marginTop: 20,
-          }}
-        />
-      </View>
+      {type !== "ownCharacters" && (
+        <View style={styles.Botonera}>
+          <Button
+            onpress={() => setPage((page) => (page !== 1 ? page - 1 : page))}
+            label="Previous"
+            color="lime"
+            style={{
+              marginHorizontal: 20,
+              marginTop: 20,
+            }}
+          />
+          <Button
+            onpress={() => setPage((page) => page + 1)}
+            label="Next"
+            color="lime"
+            style={{
+              marginHorizontal: 20,
+              marginTop: 20,
+            }}
+          />
+        </View>
+      )}
     </View>
   );
 }

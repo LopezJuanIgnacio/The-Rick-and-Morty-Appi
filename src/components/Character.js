@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   nombre: {
     fontSize: 30,
     color: '#fff',
+    maxWidth: 200,
     fontWeight: 'bold',
     marginLeft: 10,
   },

@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import CharactersNavigator from './CharactersNavigator'
-import { Add, Locations } from '../screens/'
+import AddNavigation from './AddNavigation'
+import { Locations } from '../screens/'
 
 const BottomTabs = createBottomTabNavigator()
 
@@ -37,7 +38,7 @@ const AppNavigator = () => {
         />
         <BottomTabs.Screen
           name="Add"
-          component={Add}
+          component={AddNavigation}
           options={{
             tabBarIcon: ({ focused }) => <Ionicons name={focused ? 'add' : 'add-outline'} size={24} color={focused ? "lime": "white"} />,
           }}
