@@ -1,2 +1,3 @@
 export {default as Character} from './Character.js';
-export {default as CharacterList} from './CharacterList.js';
+export {default as List} from './List.js';
+export {default as Button} from './Button.js';

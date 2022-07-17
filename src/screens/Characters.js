@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import Loading from '../../assets/Loading.gif'
 import React, { useState, useEffect, createContext } from 'react'
-import { CharacterList } from '../components/'
+import { List } from '../components/'
 
 export const NavContext = createContext()
 
@@ -12,11 +12,12 @@ export default function Characters({ navigation, route }) {
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true)
       const data = await fetch(
         `https://rickandmortyapi.com/api/character?page=${page}`
       )
       const { results } = await data.json()
-      setContent((content) => [...content, ...results])
+      setContent([...results])
       setLoading(false)
     }
     fetchData()
@@ -28,11 +29,11 @@ export default function Characters({ navigation, route }) {
         {loading ? (
           <Image source={Loading} style={styles.loading} />
         ) : (
-          <CharacterList
-            characters={content}
+          <List
+            type="characters"
+            content={content}
             setPage={setPage}
             page={page}
-            loading={loading}
           />
         )}
       </View>
@@ -47,19 +48,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     color: '#fff',
-  },
-  Button: {
-    backgroundColor: 'lime',
-    borderRadius: 20,
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  ButtonLabel: {
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: 10,
   },
   scroll: {
     flex: 1,

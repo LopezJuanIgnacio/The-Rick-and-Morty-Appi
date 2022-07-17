@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Loading from '../../assets/Loading.gif'
+import { Button } from '../components'
 
 export default function CharacterScreen({ navigation, route }) {
   const { id } = route.params
@@ -51,10 +52,10 @@ export default function CharacterScreen({ navigation, route }) {
           <Text style={styles.res}>{character.episode.length}</Text>
           <Text style={styles.label}> Location: </Text>
           <Text style={styles.res}>{character.location?.name}</Text>
-          <TouchableHighlight style={styles.Button}><Text> More </Text></TouchableHighlight> 
+          <Button label="More" color="gray" style={{margin: 0}} />
           <Text style={styles.label}> Origin: </Text>
           <Text style={styles.res}>{character.origin?.name}</Text>
-          <TouchableHighlight style={styles.Button}><Text> More </Text></TouchableHighlight> 
+          {character.origin?.name !== 'unknown' ? <Button label="More" color="gray" style={{margin: 0}} />  : null}
         </View>
       )}
     </View>
@@ -64,6 +65,8 @@ export default function CharacterScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
+    height: '100%',
     backgroundColor: '#111',
     alignItems: 'center',
     justifyContent: 'center',
@@ -116,12 +119,4 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     alignSelf: 'flex-start',
   },
-  Button: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 10,
-    marginLeft: 15,
-    marginTop: 10,
-    alignSelf: 'flex-start',
-  }
 })
