@@ -3,11 +3,11 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  TouchableHighlight,
 } from "react-native";
 import React from "react";
 import Character from "./Character.js";
 import Button from "./Button.js";
+import Location from "./Location.js";
 
 export default function List({ type, content, setPage, page }) {
   return (
@@ -18,7 +18,7 @@ export default function List({ type, content, setPage, page }) {
         style={styles.list}
         data={content}
         renderItem={({ item }) =>
-          type === "characters" ? <Character character={item} /> : null
+          type === "characters" ? <Character character={item} /> : <Location location={item} />
         }
         keyExtractor={(item) => item.id}
       />

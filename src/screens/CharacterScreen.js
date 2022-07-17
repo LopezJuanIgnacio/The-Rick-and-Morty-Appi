@@ -1,7 +1,6 @@
-import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native'
+import { View, Text, StyleSheet, Image} from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Loading from '../../assets/Loading.gif'
-import { Button } from '../components'
 
 export default function CharacterScreen({ navigation, route }) {
   const { id } = route.params
@@ -52,10 +51,8 @@ export default function CharacterScreen({ navigation, route }) {
           <Text style={styles.res}>{character.episode.length}</Text>
           <Text style={styles.label}> Location: </Text>
           <Text style={styles.res}>{character.location?.name}</Text>
-          <Button label="More" color="gray" style={{margin: 0}} />
           <Text style={styles.label}> Origin: </Text>
           <Text style={styles.res}>{character.origin?.name}</Text>
-          {character.origin?.name !== 'unknown' ? <Button label="More" color="gray" style={{margin: 0}} />  : null}
         </View>
       )}
     </View>
