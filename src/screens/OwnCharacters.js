@@ -12,7 +12,7 @@ export default function Characters({ navigation, route }) {
   useEffect(() => {
     dispatch(loader());
   }, []);
-
+  console.log("characters: ", characters);
   return (
     <View style={styles.container}>
       <List type="ownCharacters" content={characters} />

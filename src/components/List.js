@@ -15,7 +15,7 @@ export default function List({ type, content, setPage, page }) {
         style={styles.list}
         data={content}
         renderItem={({ item }) =>
-          type === "characters" ? (
+          type === "characters" || type === "ownCharacters"  ? (
             <Character character={item} />
           ) : (
             <Location location={item} />

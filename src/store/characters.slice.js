@@ -22,11 +22,11 @@ const charactersSlice = createSlice({
 
 export const { addCharacter, loadCharacters } = charactersSlice.actions
 
-export const saveProduct = (character) =>{
+export const saveCharacter = (character) =>{
     return async dispatch => {
-      console.log('1)saveProduct: ', character)
+      console.log('1)saveCharacter: ', character)
         await insertCharacter(character)
-        dispatch(addProduct(character))
+        dispatch(addCharacter(character))
     }
 }
 
