@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Alert } from "react-native";
+import { View, Text, StyleSheet, Image, Alert, ScrollView } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
@@ -8,23 +8,32 @@ import { useDispatch } from "react-redux";
 import { Input, Button } from "../components/";
 
 export default function Add({ navigation, route }) {
-  const [Form, setForm] = useState({});
+  const [Form, setForm] = useState({status: "Alive"});
   const dispatch = useDispatch();
 
   const handleChange = (name, value) => setForm({ ...Form, [name]: value });
   const handleSubmit = () => {
-    dispatch(saveCharacter(Form));
-    navigation.navigate("OwnCharacters");
+    if (
+      Form.name &&
+      Form.status &&
+      Form.species &&
+      Form.type &&
+      Form.location &&
+      Form.episode &&
+      Form.image
+    ) {
+      dispatch(saveCharacter(Form));
+      navigation.navigate("OwnCharacters");
+    }else Alert.alert("Error", "Please fill all the fields");
   };
 
   const verifyPermissions = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    console.log("permissions: ", status);
 
     if (status !== "granted") {
       Alert.alert(
-        "Permisos insuficientes",
-        "Necesitas permisos para usar la cámara",
+        "We need your permission to use your camera",
+        "so please allow us :)",
         [{ text: "OK" }]
       );
       return false;
@@ -47,7 +56,7 @@ export default function Add({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.form}>
+      <ScrollView style={styles.form}>
         <Text style={styles.title}>Add A New Character</Text>
         <Input name="name" value={Form.name} onChange={handleChange} />
         <Picker
@@ -63,6 +72,13 @@ export default function Add({ navigation, route }) {
         </Picker>
         <Input name="species" value={Form.species} onChange={handleChange} />
         <Input name="type" value={Form.type} onChange={handleChange} />
+        <Input name="location" value={Form.location} onChange={handleChange} />
+        <Input
+          name="episode"
+          value={Form.episode}
+          onChange={handleChange}
+          type="numeric"
+        />
         <Button onpress={handleTakeImage} label="Pick an image" color="lime" />
         {Form.image ? (
           <>
@@ -86,7 +102,7 @@ export default function Add({ navigation, route }) {
           <Text style={styles.err}>No Selected Image</Text>
         )}
         <Button onpress={handleSubmit} label="Save Character" color="lime" />
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -107,7 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#333",
     borderRadius: 10,
     padding: 20,
-    alignItems: "center",
+    paddingTop: 0,
   },
   title: {
     fontSize: 24,

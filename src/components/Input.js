@@ -1,7 +1,7 @@
 import { View, TextInput, StyleSheet } from "react-native";
 import React from "react";
 
-export default function Input({ name, value, onChange }) {
+export default function Input({ name, value, onChange, type="default" }) {
   return (
     <TextInput
       placeholder={name}
@@ -9,6 +9,7 @@ export default function Input({ name, value, onChange }) {
       value={value}
       onChangeText={(text) => onChange(name, text)}
       style={styles.Input}
+      keyboardType={type}
     />
   );
 }

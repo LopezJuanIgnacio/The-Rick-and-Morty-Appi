@@ -1,9 +1,15 @@
-import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
-import React, {useContext} from 'react'
-import { NavContext } from '../screens/Characters'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
+import React, { useContext } from "react";
+import { NavContext } from "../screens/Characters";
 
 export default function Character({ character }) {
-  const  navigation  = useContext(NavContext)
+  const navigation = useContext(NavContext);
   return (
     <View style={styles.container}>
       <Image
@@ -12,43 +18,53 @@ export default function Character({ character }) {
           styles.image,
           {
             borderColor:
-              character.status == 'Alive'
-                ? 'lime'
-                : character.status == 'Dead'
-                ? 'tomato'
-                : 'gray',
+              character.status == "Alive"
+                ? "lime"
+                : character.status == "Dead"
+                ? "tomato"
+                : "gray",
           },
         ]}
       />
       <View>
         <Text style={styles.nombre}>{character.name}</Text>
         <Text style={styles.status}>
-          {character.status == 'Alive'
-            ? '😀​'
-            : character.status == 'Dead'
-            ? '💀​'
-            : '❓​'}
-          {character.status} - {character.species}
+          {character.status == "Alive"
+            ? "😀​"
+            : character.status == "Dead"
+            ? "💀​"
+            : "❓​"}
+          {character.status} - {character.species} - {character.type}
         </Text>
-        <Text style={styles.label}> Episodes: </Text>
-        <Text style={styles.res}>{character.episode.length}</Text>
+        {character.episode && (
+          <>
+            <Text style={styles.label}> Episodes: </Text>
+            <Text style={styles.res}>{character.episode.length}</Text>
+          </>
+        )}
         <Text style={styles.label}> Location: </Text>
-        <Text style={styles.res}>{character.location.name}</Text>
-        <TouchableWithoutFeedback onPress={()=> navigation.navigate('Character', {id: character.id})} >
-          <Text style={styles.more}>See more</Text>
-        </TouchableWithoutFeedback>
+        <Text style={styles.res}>{character.location?.name || character.location}</Text>
+        {character.url && (
+          <TouchableWithoutFeedback
+            onPress={() =>
+              navigation.navigate("Character", { id: character.id })
+            }
+          >
+            <Text style={styles.more}>See more</Text>
+          </TouchableWithoutFeedback>
+        )}
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#333',
-    alignItems: 'center',
-    color: '#fff',
+    backgroundColor: "#333",
+    alignItems: "center",
+    color: "#fff",
     marginVertical: 15,
-    flexDirection: 'row',
+    flexDirection: "row",
     width: 350,
     height: 240,
     borderRadius: 10,
@@ -59,39 +75,39 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     borderWidth: 2,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   nombre: {
     fontSize: 30,
-    color: '#fff',
+    color: "#fff",
     maxWidth: 200,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginLeft: 10,
   },
   status: {
     fontSize: 16,
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
     marginLeft: 10,
   },
   label: {
     fontSize: 16,
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
     marginLeft: 10,
     marginTop: 10,
   },
   res: {
     fontSize: 12,
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
     marginLeft: 10,
   },
   more: {
     fontSize: 16,
-    color: 'lime',
-    fontWeight: 'bold',
+    color: "lime",
+    fontWeight: "bold",
     marginLeft: 10,
     marginTop: 10,
-  }
-})
+  },
+});
